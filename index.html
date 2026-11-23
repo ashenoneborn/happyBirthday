@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>برای مهتا ❤️</title>
+
+  <link rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      height: 100vh;
+      background: radial-gradient(circle at center, #0a0a0a, #000);
+      font-family: 'Vazirmatn', sans-serif;
+    }
+
+
+    .top-text {
+      position: absolute;
+      top: 100px;
+      width: 100%;
+      text-align: center;
+      color: #ffb3d9;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6;
+      letter-spacing: 1px;
+    }
+
+    #center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    #center h1 {
+      font-size: 2.5rem;
+      color: #ff4da6;
+      text-shadow: 0 0 15px #ff4da6;
+      margin: 0;
+    }
+
+    #center p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-top: .6rem;
+    }
+
+    .heart-word {
+      position: absolute;
+      color: #ff4da6;
+      font-size: 14px;
+      white-space: nowrap;
+      text-shadow: 0 0 8px #fff, 0 0 15px #ff4da6;
+      pointer-events: none;
+    }
+
+    .falling-heart {
+      position: absolute;
+      top: -20px;
+      color: #ff4da6;
+      font-size: 14px;
+      animation: fall linear forwards;
+      opacity: 0.8;
+    }
+
+    @keyframes fall {
+      from {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .top-text {
+        font-size: 1rem;
+        top: 15px;
+        padding: 0 10px;
+      }
+
+      #center h1 {
+        font-size: 1.8rem;
+        
+      }
+
+      #center p {
+        font-size: 0.9rem;
+      }
+
+      /* اندازه متن قلب مثل نسخه دسکتاپ */
+      .heart-word {
+        font-size: 14px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 1024px) {
+      .top-text {
+        font-size: 1.2rem;
+      }
+
+      #center h1 {
+        font-size: 2.2rem;
+      }
+
+      .heart-word {
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-text">
+    خوشگل ترین دختر دنیایی 🎂<br>
+  </div>
+
+  <div id="center">
+    <h1>تولدت مبارک مهتا 🎂🏐</h1>
+    <p>با لیاقت ترین دختر دنیایی توو
+  </div>
+  <footer>
+    ساخته شده توسط مهدیار💖
+  </footer>
+  <script>
+    const ui = document.body;
+
+
+    const text = "Happy Birthdayh";
+    const count = 50;
+
+    function heart(t) {
+      return {
+        x: 20 * Math.pow(Math.sin(t), 3),
+        y: 17 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t)
+      };
+    }
+
+    const spans = [];
+
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement("div");
+      s.className = "heart-word";
+      s.innerText = text;
+      ui.appendChild(s);
+      spans.push(s);
+    }
+
+    let offset = 0;
+
+    function animate() {
+      offset += 0.015;
+
+      spans.forEach((s, i) => {
+        const t = (Math.PI * 2 * i) / count + offset;
+        const p = heart(t);
+
+        const scale = window.innerWidth < 600 ? 8 : 12;
+
+        const x = p.x * scale + window.innerWidth / 2;
+        const y = -p.y * scale + window.innerHeight / 2;
+
+        s.style.transform = `translate(${x}px,${y}px) rotate(${t}rad)`;
+      });
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+
+    function spawnHeart() {
+      const h = document.createElement("div");
+      h.className = "falling-heart";
+      h.innerText = "🎂";
+
+      h.style.left = Math.random() * window.innerWidth + "px";
+      h.style.animationDuration = (3 + Math.random() * 3) + "s";
+      h.style.fontSize = (10 + Math.random() * 20) + "px";
+
+      document.body.appendChild(h);
+
+      setTimeout(() => h.remove(), 6000);
+    }
+
+    setInterval(spawnHeart, 200);
+  </script>
+
+</body>
+
+</html>
